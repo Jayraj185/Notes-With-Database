@@ -92,4 +92,16 @@ class DBHelper
     database!.delete('notes',where: "id = ?", whereArgs: [id]);
   }
 
+  //Search Data In Database
+  Future<List<HomeModel>> SearchData(String search) async
+  {
+
+    database = await CheckDB();
+    String ReadQuery = "SELECT * FROM notes WHERE title = ?";
+
+    List<Map> data = await database!.rawQuery(ReadQuery,[search]);
+    List<HomeModel> notes = data.map((e) => HomeModel().fromMap(e)).toList();
+    return notes;
+  }
+
 }

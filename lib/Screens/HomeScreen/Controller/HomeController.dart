@@ -12,10 +12,12 @@ class HomeController extends GetxController
   RxString time = "".obs;
   RxString day = "".obs;
   RxList<HomeModel> NotesList = <HomeModel>[].obs;
+  RxList<HomeModel> SearchNotesList = <HomeModel>[].obs;
   Rx<TextEditingController> txtTitle = TextEditingController().obs;
   Rx<TextEditingController> txtUserType = TextEditingController().obs;
   Rx<TextEditingController> txtupTitle = TextEditingController().obs;
   Rx<TextEditingController> txtupUserType = TextEditingController().obs;
+  Rx<TextEditingController> txtSearch = TextEditingController().obs;
 
 
 
@@ -23,6 +25,11 @@ class HomeController extends GetxController
   void GetData() async
   {
     NotesList.value = await DBHelper.dbHelper.ReadData();
+  }
+
+  void GetSearchData(String search) async
+  {
+    SearchNotesList.value = await DBHelper.dbHelper.SearchData(search);
   }
   void GetMonth()
   {
